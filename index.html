@@ -3,220 +3,454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stay Scape | Book Unique Stays, Instantly</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Prime Estate | Luxury Real Estate & Management Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-theme="dark">
 
-    <header class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">OMAK <span>SCAPE</span></a>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
-                <i class="fa-solid degeneration fa-bars"></i>
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+        <div class="container">
+            <a class="navbar-brand logo-brand" href="#" onclick="switchView('home')">PE <span>PRIME ESTATE</span></a>
+            <button class="navbar-toggler text-white border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <i class="fa-solid fa-bars"></i>
             </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0 target-nav-links">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="switchView('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="switchView('properties')">Properties</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="switchView('about')">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="switchView('contact')">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-3 actions-block">
+                    <button class="btn btn-nav-action outline-neon" onclick="switchView('rent-page')">Rent</button>
+                    <button class="btn btn-nav-action solid-neon" onclick="switchView('buy-page')">Buy</button>
+                    <div class="dropdown">
+                        <button class="btn btn-auth dropdown-toggle" type="button" id="authMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user-astronaut me-2"></i> Account Portal
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end custom-auth-dropdown" aria-labelledby="authMenu">
+                            <li><a class="dropdown-item" href="#" onclick="openAuthModal('login')">Sign In / Register</a></li>
+                            <li><hr class="dropdown-divider bg-secondary"></li>
+                            <li><a class="dropdown-item" href="#" onclick="switchView('user-dash')"><i class="fa-solid fa-chart-line me-2"></i> User Dashboard</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="switchView('admin-dash')"><i class="fa-solid fa-shield-halved me-2"></i> Admin Control panel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section class="hero-section">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <div class="rating-badge">
-                        <div class="avatar-group">
-                            <span class="avatar"></span>
-                            <span class="avatar"></span>
-                            <span class="avatar"></span>
-                        </div>
-                        <p><strong>100k+</strong> Reviews With 4.9 Rating</p>
-                    </div>
-                    <h1>Book Unique Stays, Instantly.</h1>
-                    <p class="hero-subtitle">Explore Fully Furnished Short-Term Rentals Across Top Destinations From Cozy City Lofts To Beachside Bungalows.</p>
+    <main id="appViewPort" class="view-mount-point">
+        
+        <section id="view-home" class="page-view active">
+            <div class="hero-block" style="background-image: linear-gradient(rgba(10,5,18,0.7), #0a0512), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');">
+                <div class="container hero-container-inner text-center py-5">
+                    <h1 class="display-3 fw-bold mb-3 mt-4">Prime Estate. Find Your Modern. Find Your Luxe.</h1>
+                    <p class="lead text-muted-custom max-width-center mb-5">Browse, rent, buy, and manage ultra-premium real estate assets across global destinations instantly through an intuitive high-security automation terminal.</p>
                     
-                    <div class="hero-actions">
-                        <button class="btn btn-primary">Talk To A Rental Expert <i class="fa-solid fa-arrow-right"></i></button>
-                        <button class="btn btn-link">List Your Property</button>
-                    </div>
-                </div>
-                <div class="hero-image-wrapper">
-                    <div class="hero-image" style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80');"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="search-section">
-            <div class="search-container">
-                <form id="searchFilterForm" class="search-bar">
-                    <div class="search-input-group">
-                        <label><i class="fa-solid fa-location-dot"></i> Location</label>
-                        <select id="filterLocation">
-                            <option value="all">Any Location</option>
-                            <option value="nyc">New York City, NY</option>
-                            <option value="miami">Miami, FL</option>
-                            <option value="la">Los Angeles, CA</option>
-                        </select>
-                    </div>
-                    <div class="search-input-group">
-                        <label><i class="fa-solid fa-house"></i> Property Type</label>
-                        <select id="filterType">
-                            <option value="all">All Categories</option>
-                            <option value="business">Business Travel</option>
-                            <option value="romantic">Romantic Getaways</option>
-                            <option value="budget">Budget-Friendly</option>
-                        </select>
-                    </div>
-                    <div class="search-input-group">
-                        <label><i class="fa-solid fa-dollar-sign"></i> Price Range</label>
-                        <select id="filterPrice">
-                            <option value="all">Any Price</option>
-                            <option value="under-250">Under $250 / night</option>
-                            <option value="above-250">$250+ / night</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
-                </form>
-            </div>
-        </section>
-
-        <section class="metrics-section">
-            <div class="section-title-center">
-                <h2>Stay Confident. Host With Ease.</h2>
-                <p>Discover Our Handpicked Selection Of Stunning Properties Across The World's Most Desirable Destinations.</p>
-            </div>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fa-solid fa-suitcase-rolling"></i></div>
-                    <h3>10,000+</h3>
-                    <p>Successful Stays</p>
-                    <small>Happy guests worldwide</small>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fa-solid fa-star"></i></div>
-                    <h3>4.9 / 5</h3>
-                    <p>Average Guest Rating</p>
-                    <small>Exceptional experiences</small>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fa-solid fa-earth-americas"></i></div>
-                    <h3>50+</h3>
-                    <p>Cities Available</p>
-                    <small>Growing destinations</small>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <h3>100%</h3>
-                    <p>Verified & Secure</p>
-                    <small>Protected payments</small>
-                </div>
-            </div>
-        </section>
-
-        <section class="categories-section">
-            <div class="section-title-center">
-                <h2>Find The Perfect Stay For Every Trip</h2>
-                <p>Choose From Content Stays Tailored To Your Lifestyle And Travel Needs.</p>
-            </div>
-            <div class="category-cards-grid">
-                <div class="category-card lifestyle-card highlight">
-                    <div class="badge-icon"><i class="fa-solid fa-briefcase"></i></div>
-                    <h3>Business Travel Homes</h3>
-                    <p>Professional stays with dedicated workspaces.</p>
-                    <div class="card-meta">
-                        <span><strong>Price Range:</strong> $180-$450/night</span>
-                        <span><strong>Capacity:</strong> 1-4 Guests</span>
-                        <span><strong>Available:</strong> 150+ locations</span>
-                    </div>
-                    <button class="btn btn-secondary-light">Browse Category</button>
-                </div>
-                <div class="category-card lifestyle-card">
-                    <div class="badge-icon"><i class="fa-solid fa-heart"></i></div>
-                    <h3>Romantic Getaways</h3>
-                    <p>Occasional spots with breathtaking views.</p>
-                    <div class="card-meta">
-                        <span><strong>Price Range:</strong> $250-$600/night</span>
-                        <span><strong>Capacity:</strong> 2 Guests</span>
-                        <span><strong>Available:</strong> 85+ locations</span>
-                    </div>
-                    <button class="btn btn-secondary">Browse Category</button>
-                </div>
-                <div class="category-card lifestyle-card">
-                    <div class="badge-icon"><i class="fa-solid fa-wallet"></i></div>
-                    <h3>Budget-Friendly Options</h3>
-                    <p>Pocket-friendly options without compromise.</p>
-                    <div class="card-meta">
-                        <span><strong>Price Range:</strong> $70-$150/night</span>
-                        <span><strong>Capacity:</strong> 1-6 Guests</span>
-                        <span><strong>Available:</strong> 210+ locations</span>
-                    </div>
-                    <button class="btn btn-secondary">Browse Category</button>
-                </div>
-            </div>
-            <div class="center-action-btn">
-                <button class="btn btn-outline">Explore All Categories</button>
-            </div>
-        </section>
-
-        <section class="listings-section">
-            <div class="listings-header">
-                <div>
-                    <h2>Popular Homes in Spotlight</h2>
-                    <p>Discover our highly requested stays booked instantly by travelers.</p>
-                </div>
-                <div class="carousel-controls">
-                    <button id="prevBtn" class="ctrl-btn"><i class="fa-solid fa-chevron-left"></i></button>
-                    <button id="nextBtn" class="ctrl-btn"><i class="fa-solid fa-chevron-right"></i></button>
-                </div>
-            </div>
-
-            <div class="listings-slider-container">
-                <div class="listings-grid" id="listingsContainer">
-                    </div>
-            </div>
-        </section>
-
-        <section class="host-cta-section">
-            <div class="host-cta-card">
-                <h2>List Your Property With Confidence</h2>
-                <p>Everything You Need To Successfully Act As A Short-Term Rental Hub And Maximize Your Property Income Potential.</p>
-                <button class="btn btn-primary shadow-btn">Talk To A Rental Expert <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </section>
-
-        <section class="brands-strip">
-            <span><i class="fa-brands fa-airbnb"></i> SafariVR</span>
-            <span><i class="fa-solid fa-bolt"></i> LightBox</span>
-            <span><i class="fa-solid fa-feather"></i> FeatherStay</span>
-            <span><i class="fa-solid fa-globe"></i> SphereStay</span>
-            <span><i class="fa-solid fa-building"></i> GlobalBank</span>
-            <span><i class="fa-solid fa-network-wired"></i> NetGroove</span>
-        </section>
-
-        <section class="testimonials-section">
-            <div class="section-title-center">
-                <h2>Loved By Guests & Trusted By Hosts</h2>
-                <p>See What Our Community Says About Their StayScape Experiences.</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"The Penthouse was absolutely divine! The check-in was seamless, the space was exactly as described, and the views were incredibly expressive. Our family loved it."</p>
-                    <div class="user-info">
-                        <div class="user-avatar"></div>
-                        <div>
-                            <h4>Sarah Jenkins</h4>
-                            <p>Guest from Chicago</p>
+                    <div class="search-bar-neon mx-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-md-3">
+                                <select class="form-select search-select" id="homeSearchLoc">
+                                    <option value="all">All Locations</option>
+                                    <option value="lagos">Lagos, Nigeria</option>
+                                    <option value="london">London, United Kingdom</option>
+                                    <option value="miami">Miami, United States</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select search-select" id="homeSearchType">
+                                    <option value="all">Buy/Rent/Management</option>
+                                    <option value="rent">For Rent</option>
+                                    <option value="buy">For Sale</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-select search-select" id="homeSearchCat">
+                                    <option value="all">Any Property Type</option>
+                                    <option value="villa">Villas</option>
+                                    <option value="duplex">Duplexes</option>
+                                    <option value="apartment">Apartments</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-search-execute w-100 py-2" onclick="executeQuickSearch()">
+                                    <i class="fa-solid fa-magnifying-glass me-2"></i> Search
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"As a host, listing my rental properties on StayScape has been revolutionary. Their payment system is swift and guest matching software ensures premium client security."</p>
-                    <div class="user-info">
-                        <div class="user-avatar"></div>
-                        <div>
-                            <h4>Marcus Vance</h4>
-                            <p>Host in Miami</p>
+            </div>
+
+            <div class="container py-5">
+                <div class="mb-5">
+                    <h2 class="section-title-neon">Featured Listings</h2>
+                    <p class="text-muted-custom">Handpicked selections verified by our tier-1 field agents.</p>
+                </div>
+                <div class="row g-4" id="featuredGridInjected">
+                    </div>
+            </div>
+
+            <div class="services-strip py-5">
+                <div class="container text-center py-4">
+                    <h3 class="mb-5 text-neon fw-bold">Our Expert Services</h3>
+                    <div class="row g-4">
+                        <div class="col-md-3">
+                            <div class="service-icon-box"><i class="fa-solid fa-laptop-house"></i></div>
+                            <h5 class="fw-bold mt-2">Modern Browsing</h5>
+                            <p class="text-muted-custom small px-2">Browse curated modern architectural concepts online flawlessly.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="service-icon-box"><i class="fa-solid fa-wallet"></i></div>
+                            <h5 class="fw-bold mt-2">Buy Online</h5>
+                            <p class="text-muted-custom small px-2">Instant direct acquisitions secured via automated legal escrows.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="service-icon-box"><i class="fa-solid fa-key"></i></div>
+                            <h5 class="fw-bold mt-2">Rent Online</h5>
+                            <p class="text-muted-custom small px-2">Digital lease generations with secure decentralized escrow profiles.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="service-icon-box"><i class="fa-solid fa-sliders"></i></div>
+                            <h5 class="fw-bold mt-2">Manage Online</h5>
+                            <p class="text-muted-custom small px-2">Track real-time valuations and clear tenant actions instantly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-5">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6">
+                        <h2 class="section-title-neon mb-4">Why Choose Prime Estate</h2>
+                        <div class="row g-4 mt-2">
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold"><i class="fa-solid fa-shield-halved text-neon me-2"></i> Trust Guaranteed</h6>
+                                <p class="text-muted-custom small">Properties run automated structural verification checks.</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold"><i class="fa-solid fa-medal text-neon me-2"></i> Elite Industry Expertise</h6>
+                                <p class="text-muted-custom small">Access top property advisory specialists 24/7 inside our grid framework.</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold"><i class="fa-solid fa-gem text-neon me-2"></i> Luxury Standards</h6>
+                                <p class="text-muted-custom small">Every asset undergoes rigorous finishing standard assessments.</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <h6 class="fw-bold"><i class="fa-solid fa-credit-card text-neon me-2"></i> Secure Payments</h6>
+                                <p class="text-muted-custom small">Direct systems handling domestic and international settlements.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-3 stats-grid-neon">
+                            <div class="col-6"><div class="stat-card text-center"><h4>18+</h4><p class="mb-0 small text-muted-custom">Properties Listed</p></div></div>
+                            <div class="col-6"><div class="stat-card text-center"><h4>50+</h4><p class="mb-0 small text-muted-custom">Successful Deals</p></div></div>
+                            <div class="col-6"><div class="stat-card text-center"><h4>10+</h4><p class="mb-0 small text-muted-custom">Happy Clients</p></div></div>
+                            <div class="col-6"><div class="stat-card text-center"><h4>100%</h4><p class="mb-0 small text-muted-custom">Verified Agents</p></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-5 border-top-neon">
+                <h3 class="text-center mb-5 section-title-neon d-block mx-auto text-center" style="max-width:max-content;">Testimonials</h3>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-5">
+                        <div class="testimonial-card-neon text-center">
+                            <div class="text-warning mb-2">★★★★★</div>
+                            <p class="small fst-italic text-muted-custom">"Acquiring my beachfront villa through Prime Estate's automated escrow payment channel was incredibly fast. Elite security!"</p>
+                            <h6 class="fw-bold mb-0">Sarah Adebayo</h6>
+                            <small class="text-neon">Lagos, Nigeria</small>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="testimonial-card-neon text-center">
+                            <div class="text-warning mb-2">★★★★★</div>
+                            <p class="small fst-italic text-muted-custom">"The digital landlord framework saves me hours of paperwork monthly. Tenant invoicing clears autonomously like clockwork."</p>
+                            <h6 class="fw-bold mb-0">Marcus Vance</h6>
+                            <small class="text-neon">Miami, USA</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container py-5">
+                <div class="cta-banner text-center p-5 rounded-4">
+                    <h3 class="fw-bold mb-3">Ready to Find Your Prime Estate?</h3>
+                    <p class="text-muted-custom max-width-center mb-4">Start your structural legacy journey online or connect with an authorized property verification specialist today.</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <button class="btn solid-neon px-4 py-2" onclick="switchView('properties')">Browse All Properties</button>
+                        <button class="btn btn-outline-light px-4 py-2" onclick="switchView('contact')">Contact Agent</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-properties" class="page-view container py-5">
+            <h2 class="section-title-neon mb-5 mt-4">Marketplace Listings Hub</h2>
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <div class="filter-panel-card p-4 rounded-4 shadow">
+                        <h5 class="mb-4 text-neon fw-bold"><i class="fa-solid fa-sliders me-2"></i> Filter Systems</h5>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Deal Specification</label>
+                            <select id="filterMode" class="form-select select-dark-neon">
+                                <option value="all">Rent & Buy Mixed</option>
+                                <option value="rent">For Rent Only</option>
+                                <option value="buy">For Sale Only</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Target Location</label>
+                            <select id="filterLocation" class="form-select select-dark-neon">
+                                <option value="all">Global Locations</option>
+                                <option value="lagos">Lagos, Nigeria</option>
+                                <option value="london">London, UK</option>
+                                <option value="miami">Miami, USA</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small fw-bold">Max Price Limit</label>
+                            <select id="filterPrice" class="form-select select-dark-neon">
+                                <option value="all">Any Valuation Limit</option>
+                                <option value="200000">Under $200,000</option>
+                                <option value="500000">Under $500,000</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold">Structural Typology</label>
+                            <select id="filterType" class="form-select select-dark-neon">
+                                <option value="all">All Architecture</option>
+                                <option value="villa">Luxury Villas</option>
+                                <option value="duplex">Modern Duplexes</option>
+                                <option value="apartment">Apartments</option>
+                            </select>
+                        </div>
+                        <button class="btn solid-neon w-100 py-2 fw-bold" onclick="applyMarketplaceFilters()">Apply Filters</button>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row g-4" id="marketplaceMasterGrid">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-details" class="page-view container py-5">
+            <button class="btn outline-neon mb-4 btn-sm mt-4" onclick="switchView('properties')"><i class="fa-solid fa-arrow-left me-2"></i> Return to Grid</button>
+            <div id="dynamicDetailsTarget">
+                </div>
+        </section>
+
+        <section id="view-rent-page" class="page-view container py-5">
+            <div class="row g-4 max-width-center-900 mt-4">
+                <div class="col-md-7">
+                    <div class="filter-panel-card p-4 rounded-4">
+                        <h4 class="mb-3 text-neon fw-bold">Digital Lease Application</h4>
+                        <form id="rentalApplicationForm" onsubmit="executeTransactionRouting(event, 'rent')">
+                            <div class="mb-3">
+                                <label class="form-label small">Target Structural Asset ID</label>
+                                <input type="text" class="form-control input-dark-neon" id="rentPropId" value="PRIME-VILLA-01" readonly>
+                            </div>
+                            <div class="row g-3 mb-3">
+                                <div class="col-sm-6">
+                                    <label class="form-label small">Target Term Duration</label>
+                                    <select class="form-select select-dark-neon" id="rentDuration">
+                                        <option value="12">12 Months (Standard Lease)</option>
+                                        <option value="24">24 Months (Extended Stay)</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="form-label small">Guarantor Account Email</label>
+                                    <input type="email" class="form-control input-dark-neon" required placeholder="corporate@guarantor.com">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label small">Gateway Integration Point</label>
+                                <select class="form-select select-dark-neon" id="rentGateway">
+                                    <option value="paystack">Paystack (NGN Local Checkout)</option>
+                                    <option value="flutterwave">Flutterwave (Pan-African Multicurrency)</option>
+                                    <option value="stripe">Stripe Portal (International Credit/Debit)</option>
+                                    <option value="paypal">PayPal Merchant Engine</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn solid-neon w-100 py-2 fw-bold">Submit Application & Authorize Payment</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="filter-panel-card p-4 rounded-4 card-accent-glow">
+                        <h5 class="fw-bold">Standard Rental Terms</h5>
+                        <p class="small text-muted-custom">By confirming execution, you consent to immediate security verification and title processing checks via our legal parameters framework.</p>
+                        <hr class="border-neon">
+                        <div class="d-flex justify-content-between mb-2 small"><span>Monthly Installment:</span><span class="text-neon fw-bold" id="rentSummaryValue">$4,500</span></div>
+                        <div class="d-flex justify-content-between mb-2 small"><span>Refundable Escrow Bond:</span><span>$9,000</span></div>
+                        <hr class="border-neon opacity-25">
+                        <div class="d-flex justify-content-between fw-bold"><span>Immediate Total:</span><span class="text-neon">$13,500</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-buy-page" class="page-view container py-5">
+            <div class="row g-4 mt-4">
+                <div class="col-lg-8">
+                    <div class="filter-panel-card p-4 rounded-4 mb-4">
+                        <h4 class="mb-3 text-neon fw-bold">Capital Acquisition Order Terminal</h4>
+                        <form id="purchaseApplicationForm" onsubmit="executeTransactionRouting(event, 'buy')">
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6"><label class="form-label small">Legal Full Name</label><input type="text" class="form-control input-dark-neon" required placeholder="John Doe"></div>
+                                <div class="col-md-6"><label class="form-label small">Tax Registration ID / NIN</label><input type="text" class="form-control input-dark-neon" required placeholder="RC-000000"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small">Preferred Payment Checkout Route</label>
+                                <select class="form-select select-dark-neon" id="buyGateway">
+                                    <option value="stripe">Stripe Luxury Clearance (USD/EUR Settlement)</option>
+                                    <option value="paystack">Paystack High-Value Portal (NGN Settlement)</option>
+                                    <option value="paypal">PayPal Escrow API Integration</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn solid-neon w-100 py-2 fw-bold">Initialize Real-Estate Title Transfer</button>
+                        </form>
+                    </div>
+                    
+                    <div class="filter-panel-card p-4 rounded-4">
+                        <h5 class="mb-3 fw-bold"><i class="fa-solid fa-calculator text-neon me-2"></i> Mortgage & Equity Calculator</h5>
+                        <div class="row g-3">
+                            <div class="col-sm-4"><label class="form-label small">Property Value ($)</label><input type="number" class="form-control input-dark-neon" id="calcVal" value="500000" oninput="runFinancialSimulations()"></div>
+                            <div class="col-sm-4"><label class="form-label small">Down Payment Equity ($)</label><input type="number" class="form-control input-dark-neon" id="calcDown" value="100000" oninput="runFinancialSimulations()"></div>
+                            <div class="col-sm-4"><label class="form-label small">Annual Interest Rate (%)</label><input type="number" class="form-control input-dark-neon" id="calcRate" value="5.5" step="0.1" oninput="runFinancialSimulations()"></div>
+                        </div>
+                        <div class="mt-4 p-3 rounded bg-dark-subtle d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <span class="small text-muted-custom">Simulated Monthly Capital Obligation (30-Yr Fixed):</span>
+                            <span class="h4 text-neon mb-0 fw-bold" id="calcResultDisplay">$2,271.16</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="filter-panel-card p-4 rounded-4 h-100">
+                        <h5 class="fw-bold text-neon mb-3">Direct Acquisition Path</h5>
+                        <ul class="list-unstyled small mt-3">
+                            <li class="mb-3 d-flex align-items-start"><i class="fa-solid fa-circle-check text-neon me-2 mt-1"></i> <span><strong>Escrow Funding:</strong> Initial downpayment securely held within digital escrow node channels.</span></li>
+                            <li class="mb-3 d-flex align-items-start"><i class="fa-solid fa-circle-check text-neon me-2 mt-1"></i> <span><strong>Automated Verification:</strong> Digital processing engine scans global registry datasets instantly.</span></li>
+                            <li class="d-flex align-items-start"><i class="fa-solid fa-circle-check text-neon me-2 mt-1"></i> <span><strong>Title Issuance:</strong> Electronic certification generated with full physical copy couriers within 48 hours.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-about" class="page-view container py-5 text-center">
+            <div class="max-width-center mb-5 mt-4">
+                <h2 class="section-title-neon mb-3">Company Overview</h2>
+                <p class="text-muted-custom">Prime Estate is an architectural and digital real estate terminal operating across premier international investment lanes.</p>
+            </div>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <div class="filter-panel-card p-4 rounded-4 text-start">
+                        <h4 class="text-neon fw-bold mb-3"><i class="fa-solid fa-eye me-2"></i> Our Mission</h4>
+                        <p class="text-muted-custom small mb-0">To remove traditional transaction drag from asset acquisition workflows using modern UI paradigms and secure global transaction channels.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="filter-panel-card p-4 rounded-4 text-start">
+                        <h4 class="text-neon fw-bold mb-3"><i class="fa-solid fa-bullseye me-2"></i> Our Vision</h4>
+                        <p class="text-muted-custom small mb-0">Providing immediate global real-estate fractional and full title access using programmatic clearance execution pathways instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-contact" class="page-view container py-5">
+            <div class="row g-5 mt-2">
+                <div class="col-md-6">
+                    <div class="filter-panel-card p-4 rounded-4 shadow">
+                        <h4 class="mb-4 text-neon fw-bold">Initialize Communications</h4>
+                        <form onsubmit="event.preventDefault(); alert('Message dispatched successfully to assigned desk agent.');">
+                            <div class="mb-3"><label class="form-label small">Contact Identity Name</label><input type="text" class="form-control input-dark-neon" required placeholder="Client Full Name"></div>
+                            <div class="mb-3"><label class="form-label small">Routing Electronic Address</label><input type="email" class="form-control input-dark-neon" required placeholder="client@domain.com"></div>
+                            <div class="mb-3"><label class="form-label small">Message Body Details</label><textarea class="form-control input-dark-neon" rows="4" placeholder="Detail your requested architectural investment target requirements..."></textarea></div>
+                            <button type="submit" class="btn solid-neon w-100 py-2 fw-bold">Dispatch Message System</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4 class="mb-4 text-neon fw-bold">Corporate HQ Coordinates</h4>
+                    <p class="mb-2"><i class="fa-solid fa-building text-neon me-2"></i> Tower Alpha, Floor 14, High Luxury Lane, Lagos Nigeria.</p>
+                    <p class="mb-2"><i class="fa-solid fa-phone text-neon me-2"></i> +234 (0) 1 555 LUXE</p>
+                    <p class="mb-4"><i class="fa-solid fa-envelope text-neon me-2"></i> operational-desk@primeestate.io</p>
+                    <div class="mock-map-canvas d-flex align-items-center justify-content-center text-center p-3">
+                        <div class="small text-muted-custom"><i class="fa-solid fa-map-location-dot d-block fs-1 mb-2 text-neon"></i> Google Maps Canvas API Interfacing Mounted<br><small>[6.4281° N, 3.4219° E]</small></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-user-dash" class="page-view dashboard-view-layout py-5">
+            <div class="container py-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                    <h3 class="fw-bold mb-0 text-dark-neutral-override"><i class="fa-solid fa-grip me-2 text-neon"></i> User Workspace</h3>
+                    <span class="badge bg-purple-neon p-2 px-3 fs-7">Authenticated Investor Profile</span>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3">
+                        <div class="dash-sidebar-list-group bg-white p-3 rounded-4 shadow-sm">
+                            <a href="#" class="active"><i class="fa-solid fa-user me-2"></i> Profile Overview</a>
+                            <a href="#"><i class="fa-solid fa-heart me-2"></i> Saved Wishlist</a>
+                            <a href="#"><i class="fa-solid fa-receipt me-2"></i> Ledger Payments</a>
+                            <a href="#"><i class="fa-solid fa-key me-2"></i> Active Leases</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="card p-4 shadow-sm border-0 bg-white text-dark rounded-4">
+                            <h5 class="fw-bold border-bottom pb-2 mb-3">Client Information Dossier</h5>
+                            <div class="row g-3 mb-4 small">
+                                <div class="col-sm-6"><label class="small text-muted d-block">Account Designation</label><strong class="text-dark">Premium Investor Account</strong></div>
+                                <div class="col-sm-6"><label class="small text-muted d-block">Electronic Mail Routing</label><strong class="text-dark">investor@primeestate.com</strong></div>
+                            </div>
+                            <h5 class="fw-bold border-bottom pb-2 mb-3">Active Investments Assets</h5>
+                            <div class="table-responsive">
+                                <table class="table table-striped align-middle custom-dash-table mb-0">
+                                    <thead><tr><th>Asset ID</th><th>Typology</th><th>Financial Value</th><th>Status Level</th><th>Action</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><code>PE-VILLA-002</code></td><td>Luxury Villa</td><td>$5,500 / mo</td><td><span class="badge bg-success">Lease Active</span></td><td><button class="btn btn-sm btn-outline-secondary" onclick="alert('Downloading invoice PDF...')"><i class="fa-solid fa-download"></i> Invoice</button></td></tr>
+                                        <tr><td><code>PE-DUPLEX-04</code></td><td>Modern Duplex</td><td>$338,000 Total</td><td><span class="badge bg-warning text-dark">Escrow Hold</span></td><td><button class="btn btn-sm btn-outline-secondary" disabled><i class="fa-solid fa-hourglass"></i> Processing</button></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-admin-dash" class="page-view dashboard-view-layout py-5">
+            <div class="container py-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+                    <h3 class="fw-bold mb-0 text-dark-neutral-override"><i class="fa-solid fa-shield-halved me-2 text-danger"></i> Admin System Terminal</h3>
+                    <button class="btn btn-danger btn-sm p-2 px-3 fw-bold rounded-3" onclick="openNewPropertyManagerForm()"><i class="fa-solid fa-plus me-1"></i> Add New Real Estate Node</button>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3">
+                        <div class="dash-sidebar-list-group bg-white p-3 rounded-4 shadow-sm">
+                            <a href="#" class="active"><i class="fa-solid fa-house-chimney me-2"></i> Active Inventories</a>
+                            <a href="#"><i class="fa-solid fa-users me-2"></i> User Privileges</a>
+                            <a href="#"><i class="fa-solid fa-vault me-2"></i> Escrow Clearances</a>
+                            <a href="#"><i class="fa-solid fa-chart-pie me-2"></i> Report Compilation</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="card p-4 shadow-sm border-0 bg-white text-dark rounded-4">
+                            <h5 class="fw-bold border-bottom pb-2 mb-3">Inventory Pipeline Controller</h5>
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle custom-dash-table mb-0" id="adminInventoryTableTarget">
+                                    </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -224,19 +458,160 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 StayScape Technologies Inc. All rights reserved.</p>
-    </footer>
-
-    <div class="modal-overlay" id="detailModal">
-        <div class="modal-wrapper">
-            <button class="close-modal-btn" id="closeModalBtn">&times;</button>
-            
-            <div class="modal-body-layout" id="modalDynamicContent">
+    <!-- <div class="modal fade" id="authGatewayModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-neon-style rounded-4">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold" id="authModalTitle">Access Verification Node</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body p-4">
+                    <form id="authModalFormSystem" onsubmit="executeMockAuthentication(event)">
+                        <div class="mb-3">
+                            <label class="form-label small">Account Security Identity Role</label>
+                            <select class="form-select select-dark-neon" id="authRole">
+                                <option value="customer">Customer Access Level Profile</option>
+                                <option value="agent">Certified Property Field Agent Verification</option>
+                                <option value="admin">Global Root System Administrator Privilege</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label small">Secured Electronic Access Address</label>
+                            <input type="email" class="form-control input-dark-neon" id="authEmail" required placeholder="security-identity@primeestate.io">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label small">Encryption Key Pass Phrase</label>
+                            <input type="password" class="form-control input-dark-neon" id="authPass" required placeholder="••••••••••••">
+                        </div>
+                        <button type="submit" class="btn solid-neon w-100 mb-3 py-2 fw-bold">Execute Identity Handshake</button>
+                        <button type="button" class="btn btn-outline-light w-100 btn-sm py-2" onclick="alert('Federated Google Auth API Handshake initiated...')">
+                            <i class="fa-brands fa-google me-2"></i> Connect via Google Single Sign-On
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+    <div class="modal fade" id="authGatewayModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-neon-style rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <ul class="nav nav-tabs w-100 border-bottom border-secondary" id="authTabs" role="tablist">
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button class="nav-link active text-white w-100 fw-bold border-0 bg-transparent text-center" id="login-tab" data-bs-toggle="tab" data-bs-target="#login-panel" type="button" role="tab">Sign In</button>
+                        </li>
+                        <li class="nav-item flex-fill" role="presentation">
+                            <button class="nav-link text-white w-100 fw-bold border-0 bg-transparent text-center" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup-panel" type="button" role="tab">Register</button>
+                        </li>
+                    </ul>
+                    <button type="button" class="btn-close btn-close-white ms-2 align-self-start" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div class="tab-content" id="authTabsContent">
+                        
+                        <div class="tab-pane fade show active" id="login-panel" role="tabpanel" aria-labelledby="login-tab">
+                            <form onsubmit="executeMockAuthentication(event, 'login')">
+                                <div class="mb-3">
+                                    <label class="form-label small text-muted-custom">Security Role</label>
+                                    <select class="form-select select-dark-neon" id="loginRole">
+                                        <option value="customer">Customer Access Level</option>
+                                        <option value="agent">Certified Property Agent</option>
+                                        <option value="admin">System Administrator</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small text-muted-custom">Email Address</label>
+                                    <input type="email" class="form-control input-dark-neon" required placeholder="name@domain.com">
+                                </div>
+                                <div class="mb-2">
+                                    <label class="form-label small text-muted-custom">Password</label>
+                                    <input type="password" class="form-control input-dark-neon" required placeholder="••••••••••••">
+                                </div>
+                                <div class="text-end mb-3">
+                                    <a href="#" class="small text-neon text-decoration-none" onclick="toggleForgotPasswordView(true)">Forgot Password?</a>
+                                </div>
+                                <button type="submit" class="btn solid-neon w-100 py-2 fw-bold mb-3">Clear Authentication Handshake</button>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="signup-panel" role="tabpanel" aria-labelledby="signup-tab">
+                            <form onsubmit="executeMockAuthentication(event, 'signup')">
+                                <div class="mb-3">
+                                    <label class="form-label small text-muted-custom">Select Your Role</label>
+                                    <select class="form-select select-dark-neon">
+                                        <option value="customer">Customer (Buy / Rent / Manage)</option>
+                                        <option value="agent">Independent Agent / Agency Representative</option>
+                                    </select>
+                                </div>
+                                <div class="row g-2 mb-3">
+                                    <div class="col-6">
+                                        <label class="form-label small text-muted-custom">First Name</label>
+                                        <input type="text" class="form-control input-dark-neon" required placeholder="John">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label small text-muted-custom">Last Name</label>
+                                        <input type="text" class="form-control input-dark-neon" required placeholder="Doe">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label small text-muted-custom">Email Address</label>
+                                    <input type="email" class="form-control input-dark-neon" required placeholder="john.doe@prime.com">
+                                </div>
+                                <div class="row g-2 mb-4">
+                                    <div class="col-6">
+                                        <label class="form-label small text-muted-custom">Password</label>
+                                        <input type="password" class="form-control input-dark-neon" required placeholder="••••••••">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label small text-muted-custom">Confirm Password</label>
+                                        <input type="password" class="form-control input-dark-neon" required placeholder="••••••••">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn solid-neon w-100 py-2 fw-bold mb-3">Create Verified Account Profile</button>
+                            </form>
+                        </div>
+
+                        <div class="d-none" id="forgot-panel">
+                            <h5 class="fw-bold text-neon mb-2">Reset Encryption Key</h5>
+                            <p class="small text-muted-custom mb-3">Enter your registered email address below. We'll broadcast a secure verification link to update your parameters.</p>
+                            <form onsubmit="event.preventDefault(); alert('Password recovery node broadcast complete. Check your email inbox for resetting guidelines.'); toggleForgotPasswordView(false);">
+                                <div class="mb-4">
+                                    <label class="form-label small text-muted-custom">Account Email</label>
+                                    <input type="email" class="form-control input-dark-neon" required placeholder="name@domain.com">
+                                </div>
+                                <button type="submit" class="btn solid-neon w-100 py-2 fw-bold mb-2">Send Recovery Link</button>
+                                <button type="button" class="btn btn-outline-light btn-sm w-100" onclick="toggleForgotPasswordView(false)">Back to Login</button>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div id="socialAuthStrip" class="border-top border-secondary pt-3 mt-2">
+                        <button type="button" class="btn btn-outline-light w-100 btn-sm py-2" onclick="alert('Federated Google Single Sign-On handshake initialized successfully.')">
+                            <i class="fa-brands fa-google me-2 text-danger"></i> Continue with Google Authentication
+                        </button>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 
+    <footer class="global-footer-neon py-4 border-top-neon mt-5">
+        <div class="container text-center">
+            <p class="small text-muted-custom mb-3">&copy; 2026 Prime Estate Technologies Infrastructure Inc. All Rights Reserved.</p>
+            <div class="d-flex justify-content-center gap-4 secure-payment-icons-strip flex-wrap">
+                <span><i class="fa-brands fa-stripe"></i> SECURE STRIPE</span>
+                <span><i class="fa-brands fa-paypal"></i> PAYPAL GATEWAY</span>
+                <span><i class="fa-solid fa-shield-halved"></i> PAYSTACK SECURE</span>
+                <span><i class="fa-solid fa-bolt"></i> FLUTTERWAVE APPROVED</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
