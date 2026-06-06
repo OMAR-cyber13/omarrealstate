@@ -391,43 +391,86 @@
             </div>
         </section>
 
-        <section id="view-user-dash" class="page-view dashboard-view-layout py-5">
-            <div class="container py-4">
-                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
-                    <h3 class="fw-bold mb-0 text-dark-neutral-override"><i class="fa-solid fa-grip me-2 text-neon"></i> User Workspace</h3>
-                    <span class="badge bg-purple-neon p-2 px-3 fs-7">Authenticated Investor Profile</span>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-3">
-                        <div class="dash-sidebar-list-group bg-white p-3 rounded-4 shadow-sm">
-                            <a href="#" class="active"><i class="fa-solid fa-user me-2"></i> Profile Overview</a>
-                            <a href="#"><i class="fa-solid fa-heart me-2"></i> Saved Wishlist</a>
-                            <a href="#"><i class="fa-solid fa-receipt me-2"></i> Ledger Payments</a>
-                            <a href="#"><i class="fa-solid fa-key me-2"></i> Active Leases</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="card p-4 shadow-sm border-0 bg-white text-dark rounded-4">
-                            <h5 class="fw-bold border-bottom pb-2 mb-3">Client Information Dossier</h5>
-                            <div class="row g-3 mb-4 small">
-                                <div class="col-sm-6"><label class="small text-muted d-block">Account Designation</label><strong class="text-dark">Premium Investor Account</strong></div>
-                                <div class="col-sm-6"><label class="small text-muted d-block">Electronic Mail Routing</label><strong class="text-dark">investor@primeestate.com</strong></div>
-                            </div>
-                            <h5 class="fw-bold border-bottom pb-2 mb-3">Active Investments Assets</h5>
-                            <div class="table-responsive">
-                                <table class="table table-striped align-middle custom-dash-table mb-0">
-                                    <thead><tr><th>Asset ID</th><th>Typology</th><th>Financial Value</th><th>Status Level</th><th>Action</th></tr></thead>
-                                    <tbody>
-                                        <tr><td><code>PE-VILLA-002</code></td><td>Luxury Villa</td><td>$5,500 / mo</td><td><span class="badge bg-success">Lease Active</span></td><td><button class="btn btn-sm btn-outline-secondary" onclick="alert('Downloading invoice PDF...')"><i class="fa-solid fa-download"></i> Invoice</button></td></tr>
-                                        <tr><td><code>PE-DUPLEX-04</code></td><td>Modern Duplex</td><td>$338,000 Total</td><td><span class="badge bg-warning text-dark">Escrow Hold</span></td><td><button class="btn btn-sm btn-outline-secondary" disabled><i class="fa-solid fa-hourglass"></i> Processing</button></td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+        <!-- UPDATED SECURE CUSTOMER DASHBOARD WORKSPACE -->
+<section id="view-user-dash" class="page-view dashboard-view-layout py-5">
+    <div class="container-fluid px-4 mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-5 mt-4 flex-wrap gap-3">
+            <h3 class="fw-extrabold mb-0 text-dark-neutral-override">
+                <i class="fa-solid fa-user-gear me-3 text-neon"></i> Client Management Console
+            </h3>
+            <div class="d-flex align-items-center gap-3">
+                <div class="badge bg-purple-neon p-2 px-3 fw-bold fs-7">Tier 1 Investor Portal</div>
+                <button class="btn btn-outline-secondary btn-sm" onclick="switchView('home')">Logout Portal</button>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- DASHBOARD SIDEBAR NAVIGATION PANEL -->
+            <div class="col-lg-3">
+                <div class="dash-sidebar-list-group bg-white p-3 rounded-4 shadow-sm border border-light-subtle">
+                    <a href="#" onclick="activateUserDashView('profile')" class="active" id="dashNavLinkProfile">
+                        <i class="fa-solid fa-id-card me-2 fs-5"></i> Profile Dossier
+                    </a>
+                    <a href="#" onclick="activateUserDashView('wishlist')" id="dashNavLinkWishlist">
+                        <i class="fa-solid fa-heart me-2 fs-5"></i> Saved Wishlist Grid
+                    </a>
+                    <!-- *** NEW TRACKING HISTORY LINK *** -->
+                    <a href="#" onclick="activateUserDashView('history')" id="dashNavLinkHistory">
+                        <i class="fa-solid fa-receipt me-2 fs-5"></i> Order & Transaction History
+                    </a>
+                    <a href="#" onclick="activateUserDashView('leases')" id="dashNavLinkLeases">
+                        <i class="fa-solid fa-key me-2 fs-5"></i> Active Lease Portfolio
+                    </a>
                 </div>
             </div>
-        </section>
+
+            <!-- DASHBOARD DYNAMIC CONTENT MAIN WINDOW -->
+            <div class="col-lg-9">
+                
+                <!-- CONTENT ZONE 1: PROFILE OVERVIEW (CURRENT) -->
+                <div class="card p-4 shadow border-0 bg-white text-dark rounded-4" id="userDashZoneProfile">
+                    <h5 class="fw-extrabold border-bottom pb-3 mb-4 text-secondary-emphasis">Active Investments Assets</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped align-middle custom-dash-table mb-0">
+                            <thead class="text-secondary text-uppercase small"><tr><th>Asset ID Reference</th><th>Typology</th><th>Financial Value</th><th>Status Level</th><th>Action</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>PE-VILLA-002</strong></td><td>Luxury Villa</td><td>$5,500 / mo</td><td><span class="badge bg-success px-2 py-1">Lease Dispatched</span></td><td><button class="btn btn-sm btn-outline-secondary" onclick="alert('Downloading invoice ledger PDF block...')"><i class="fa-solid fa-download me-1"></i> Invoice</button></td></tr>
+                                <tr><td><strong>PE-DUPLEX-04</strong></td><td>Modern Duplex</td><td>$338,000 Total</td><td><span class="badge bg-warning px-2 py-1 text-dark">Escrow Processing</span></td><td><button class="btn btn-sm btn-outline-secondary" disabled><i class="fa-solid fa-hourglass-start me-1"></i> Awaiting Funds</button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- CONTENT ZONE 2: ORDER & TRANSACTION HISTORY (NEW) -->
+                <div class="card p-4 shadow border-0 bg-white text-dark rounded-4 d-none" id="userDashZoneHistory">
+                    <h5 class="fw-extrabold text-secondary-emphasis mb-1">Your Historical Transaction Records</h5>
+                    <p class="text-muted small mb-4">Track the lifecycle of every order node executed through your verified credentials.</p>
+                    
+                    <!-- Advanced Transaction Tracking Table Matrix -->
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle table-borderless table-striped-columns rounded-3 overflow-hidden shadow-sm border border-light-subtle" id="userOrderHistoryTableTarget">
+                            <thead class="bg-light-subtle text-muted text-uppercase small font-weight-bold">
+                                <tr>
+                                    <th class="ps-3 py-3">Order ID / Timestamp</th>
+                                    <th>Asset Details</th>
+                                    <th>Transaction Type</th>
+                                    <th>Fiscal Value / Gateway</th>
+                                    <th>Execution Status</th>
+                                    <th class="pe-3">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="small">
+                                <!-- Programmatically Mounted rows from script.js initializeOrderTrackingHistory() -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ADD OTHER CONTENT ZONES (WISHLIST, LEASES) IF NEEDED -->
+            </div>
+        </div>
+    </div>
+</section>
 
         <section id="view-admin-dash" class="page-view dashboard-view-layout py-5">
             <div class="container py-4">
